@@ -8,10 +8,13 @@
 (def api-url "http://axidraw.local:9090/cmd/")
 
 (defn -main [& args]
-  ;(def p (plotter-out/->PlotterOut api-url)  )
-  (def p (svg-out/->SvgOut api-url)  )
+  (def p (plotter-out/->PlotterOut api-url)  )
+  ; (triangle p {:x 0 :y 0} {:x 1 :y 1} {:x 2 :y 2})  
+  ;(triangle-fill p {:x 0 :y 0} {:x 1 :y 2} {:x 2 :y 0}) 
+  (triangle p {:x 0 :y 0} {:x 1 :y 2} {:x 2 :y 0}) 
+  ;(def p (svg-out/->SvgOut api-url)  )
 
   ; use apply to pass the vector as arguments
-  (svg-document p  (triangle p [0 0] [1 1] [2 0])  )
+  ;(svg-document p  (triangle p [0 0] [1 1] [2 0])  )
   )
 

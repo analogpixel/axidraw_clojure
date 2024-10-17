@@ -3,6 +3,8 @@
 (defprotocol Output
    (line [this p1 p2])
    (triangle [this p1 p2 p3])
+   (triangle-fill [this p1 p2 p3])
+
    )
 
 (defprotocol Svg

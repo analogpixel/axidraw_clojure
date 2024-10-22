@@ -52,7 +52,9 @@
     (let [
           s1 (slope p1 p2)
           s2 (slope p3 p2)
-          r (range (:y p1) (:y p2) 0.1)
+          max_y (apply max (map #(:y %) [p1 p2 p3]))
+          min_y (apply min (map #(:y %) [p1 p2 p3]))
+          r (range min_y max_y 0.1)  
           pts (map #(vector 
               {:x (x-point-on-line s1 p1 %) :y %} 
               {:x (x-point-on-line s2 p2 %) :y %} 

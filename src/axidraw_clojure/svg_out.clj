@@ -20,7 +20,7 @@
     (let [document [:dali/page {
                                 :width 400 
                                 :height 400 
-                                } inputs ]]
+                                }  (into [:g {}] inputs)  ]]
       (io/render-svg document "test.svg")
     )
   )

@@ -15,7 +15,13 @@
   
   (def p (svg-out/->SvgOut api-url)  )
 
+  (def drawing  [  
+                (triangle p {:x 0 :y 0} {:x 1 :y 2} {:x 2 :y 0})
+                (triangle p {:x 0 :y 2} {:x 2 :y 2} {:x 1 :y 0})
+                ]
+    )
+
   ; use apply to pass the vector as arguments
-  (svg-document p  (triangle p {:x 0 :y 0} {:x 1 :y 2} {:x 2 :y 0})) 
+  (svg-document p drawing ) 
   )
 

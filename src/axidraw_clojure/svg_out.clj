@@ -1,14 +1,8 @@
 (ns axidraw-clojure.svg-out
   (:require [dali.io :as io])
   (:use [axidraw-clojure.proto])
+  (:use [axidraw-clojure.macros])
   )
-
-; point to vector 
-(defmacro p2v [point]
-  `[(:x ~point) (:y ~point)])
-
-(defmacro p2v [point scale]
-  `[(* (:x ~point) ~scale) (* (:y ~point) ~scale)])
 
 (defrecord SvgOut [api-url]
   Output

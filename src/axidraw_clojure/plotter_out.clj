@@ -33,6 +33,11 @@
   (pen-up   [this] (send-command this "pu" nil) )
   (pen-down [this] (send-command this "pd" nil) )
 
+  (reset-plotter [this] 
+    (pen-up this)
+     (send-command this "mt" "0,0")
+     )
+     
   ;; Output
   (line [this p1 p2]
      (send-command this "mt" (str (:x p1) "," (:y p1)))

@@ -15,4 +15,5 @@
   (send-command [this cmd options]) ; send a command to the plotter 
   (pen-up [this]) ; pen down
   (pen-down [this]) ; pen up
+  (reset-plotter [this]) ; reset the plotter
   )

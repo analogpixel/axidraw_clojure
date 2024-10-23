@@ -7,3 +7,9 @@
 (defmacro p2v [point scale]
   `[(* (:x ~point) ~scale) (* (:y ~point) ~scale)])
 
+
+(defmacro do-range [f start stop step]
+  `(doall 
+     (map ~f 
+          (range ~start ~stop ~step))))
+

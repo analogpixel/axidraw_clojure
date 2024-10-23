@@ -4,6 +4,7 @@
             )
   (:use [axidraw-clojure.proto])
   (:use [axidraw-clojure.utils])
+  (:use [axidraw-clojure.macros])
   (:gen-class))
 
 (def api-url "http://axidraw.local:9090/cmd/")
@@ -27,12 +28,7 @@
   ;(reset-plotter p)
   (def drawing [
                (line p p1 p2)
-               (doall ; plotter won't finish if you don't force it and mapv causes svg render to break
-                 (map 
-                    #(line p (rotate-point p1 cp %) (rotate-point p2 cp %))
-                    (range 0 3 0.5)
-                    )
-               )
+               (do-range #(line p (rotate-point p1 cp %) (rotate-point p2 cp %)) 0 3 0.5)
                ]
    ) 
 

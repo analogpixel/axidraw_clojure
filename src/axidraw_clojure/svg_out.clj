@@ -1,10 +1,11 @@
 (ns axidraw-clojure.svg-out
   (:require [dali.io :as io])
   (:use [axidraw-clojure.proto])
+  (:use [axidraw-clojure.utils])
   (:use [axidraw-clojure.macros])
   )
 
-(defrecord SvgOut [api-url]
+(defrecord SvgOut [api-url svg-width svg-height virtual-width virtual-height]
   Output
   Svg
 
@@ -20,7 +21,11 @@
   )
 
   (line [this p1 p2]
-    [:line {:stroke :indigo :stroke-width 4 :fill :darkorange} (p2v p1 100) (p2v p2 100)]
+    (let [p1t {:x (map-range (:x p1) 0 virtual-width 0 svg-width) :y (map-range (:y p1) 0 virtual-height 0 svg-height)}
+          p2t {:x (map-range (:x p2) 0 virtual-width 0 svg-width) :y (map-range (:y p2) 0 virtual-height 0 svg-height)}
+          ]
+          [:line {:stroke :indigo :stroke-width 4 :fill :darkorange} (p2v p1t 1) (p2v p2t 1)]
+          )
     )
 
   (triangle [this p1 p2 p3]

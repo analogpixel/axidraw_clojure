@@ -6,6 +6,7 @@
   :dependencies [
                  [org.clojure/clojure "1.11.1"]
                  [dali "1.0.2"]
+                 [net.mikera/imagez "0.12.0"]
                  ]
   :main ^:skip-aot axidraw-clojure.core
   :target-path "target/%s"

@@ -1,5 +1,7 @@
 (ns axidraw-clojure.plotter-out
-  (:use [axidraw-clojure.proto]))
+  (:use [axidraw-clojure.proto])
+  (:use [axidraw-clojure.utils])
+  )
 
 ; get the slope of a line defined by points p1 and p2
 (defn slope [p1 p2] 
@@ -16,7 +18,7 @@
   )
 )
 
-(defrecord PlotterOut [api-url]
+(defrecord PlotterOut [api-url plotter-width plotter-height virtual-width virtual-height]
   Output
   Plotter
 
@@ -40,8 +42,16 @@
      
   ;; Output
   (line [this p1 p2]
-     (send-command this "mt" (str (:x p1) "," (:y p1)))
-     (send-command this "lt" (str (:x p2) "," (:y p2)))
+     (send-command this "mt" (str 
+                               (map-range (:x p1) 0 virtual-width 0 plotter-width)  "," 
+                               (map-range (:y p1) 0 virtual-height 0 plotter-height)
+                               ))
+
+     (send-command this "lt" (str 
+                               (map-range (:x p2) 0 virtual-width 0 plotter-width)  "," 
+                               (map-range (:y p2) 0 virtual-height 0 plotter-height)
+                               ))
+
     )
 
   ; draw a triangle

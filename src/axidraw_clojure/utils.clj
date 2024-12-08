@@ -37,7 +37,8 @@
        get-pixels
        (map color)
        (mapv #(vector (.getRed %) (.getGreen %) (.getBlue %) (.getAlpha %)))
-       (partition 100) 
+       (partition 100 )  ; TODO fix needs to be width, not just a static number
+       (mapv vec)
        )
 )
 
@@ -58,3 +59,19 @@
     (nth (nth (nth pixels y) x) idx)
     )
   )
+
+(defn grid-avg-pixels [pixels xstart xend ystart yend]
+  "return the average pixel value given a block of pixels start->upto"
+
+  (let [
+        subrange (mapv #(subvec % xstart xend) (subvec pixels ystart yend))
+        values   (map #(reduce + (map first %)) subrange)
+        cnt      (* (- xend xstart) (- yend ystart)) 
+        total    (reduce + values)
+        avg      (/ total cnt)
+       ] 
+    avg
+    )
+
+  )
+

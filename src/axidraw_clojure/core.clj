@@ -11,9 +11,12 @@
 (def api-url "http://axidraw.local:9090/cmd/")
 
 (defn -main [& args]
-  
-  ;(def p (svg-out/->SvgOut api-url 100 100 100 100)  )
-  (def p (plotter-out/->PlotterOut api-url 10 10 100 100)  )
+ 
+  ; create a canvas 200x200 with a virtual size of 100x100 
+  ;(def p (svg-out/->SvgOut api-url 200 200 100 100)  )
+
+  ; create a plot 8inches x 8inches with a virtual size of 100x100
+  (def p (plotter-out/->PlotterOut api-url 8 8 100 100)  )
 
   ; (def drawing  [  
   ;               (triangle-fill p {:x 0 :y 0} {:x 1 :y 2} {:x 2 :y 0})
@@ -22,9 +25,13 @@
   ;   )
  
 
-  ; create a 20x20 grid with each cell being 10unitsx10units
-  (def pixels (load-pixels "bw_gradient.png"))
-  (def g (grid-from-pixels pixels 9 9))
+  (def pixels (load-pixels "low_polly_skull_small.jpg"))
+
+  ; grid from pixels willcreate a grid x cells wide and y cells high
+  ; with the cell size being calculated from the pixels dimensions
+  ; so if you have 10 columns in your grid, and you image is 200pixels wide
+  ; then each cell will be 20 pixels wide
+  (def g (grid-from-pixels pixels 40 40))
 
   ; (def p1 {:x 1 :y 0}) 
   ; (def p2 {:x 1 :y 1})
@@ -40,19 +47,19 @@
       )
     )
 
-  (grid-do g make-lines)
+  ;(grid-do g make-lines)
 
-  ;(reset-plotter p)
-  ; (def drawing [
-  ;              (grid-do g make-lines)
-  ;              ;(line p p1 p2)
-  ;              ;(do-range #(line p (rotate-point p1 cp %) (rotate-point p2 cp %)) 0 3 0.5)
-  ;              ]
-  ;  ) 
+  (reset-plotter p)
+  (def drawing [
+               (grid-do g make-lines)
+               ;(line p p1 p2)
+               ;(do-range #(line p (rotate-point p1 cp %) (rotate-point p2 cp %)) 0 3 0.5)
+               ]
+   ) 
 
-  ;(reset-plotter p)
+  (reset-plotter p)
 
   ; use apply to pass the vector as arguments
-  ;(svg-document p drawing ) 
+  ; (svg-document p drawing ) 
   )
 

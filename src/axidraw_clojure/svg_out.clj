@@ -10,11 +10,11 @@
   Svg
 
   (svg-document [this inputs]
-  (println "svg-document" inputs)
+  ;(println "svg-document" inputs)
 
     (let [document [:dali/page {
-                                :width 400 
-                                :height 400 
+                                :width 1800 
+                                :height 1800 
                                 }  (into [:g {}] inputs)  ]]
       (io/render-svg document "test.svg")
     )
@@ -24,7 +24,7 @@
     (let [p1t {:x (map-range (:x p1) 0 virtual-width 0 svg-width) :y (map-range (:y p1) 0 virtual-height 0 svg-height)}
           p2t {:x (map-range (:x p2) 0 virtual-width 0 svg-width) :y (map-range (:y p2) 0 virtual-height 0 svg-height)}
           ]
-          [:line {:stroke :indigo :stroke-width 4 :fill :darkorange} (p2v p1t 1) (p2v p2t 1)]
+          [:line {:stroke :indigo :stroke-width 1 :fill :darkorange} (p2v p1t 1) (p2v p2t 1)]
           )
     )
 
